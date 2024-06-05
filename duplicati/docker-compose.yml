@@ -1,0 +1,18 @@
+services:
+  duplicati:
+    container_name: duplicati
+    entrypoint:
+      - /init
+    ports:
+      - 8200:8200 # MGMT UI
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Edmonton
+    hostname: duplicati
+    image: linuxserver/duplicati:latest
+    restart: unless-stopped
+    volumes:
+      - /your_drive/duplicati:/backups
+      - ./config:/config
+      - /your_drive:/source # change this
